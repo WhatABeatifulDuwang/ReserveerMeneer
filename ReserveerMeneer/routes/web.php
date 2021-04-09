@@ -16,6 +16,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 Route::get('/event', [EventController::class, 'index']);
+
+require __DIR__ . '/auth.php';
+
+Route::prefix('evenementen-films')->group(function () {
+    Route::get('/', 'EventController@index')->name('getEventIndex');
+});
+
+Route::prefix('restaurants')->group(function () {
+    Route::get('/', 'RestaurantController@index')->name('getRestaurantIndex');
+});
