@@ -26,7 +26,7 @@ Route::get('/event', [EventController::class, 'index']);
 
 require __DIR__ . '/auth.php';
 
-Route::prefix('evenementen-films')->group(function () {
+Route::prefix('evenementen')->group(function () {
     Route::get('/', 'EventController@index')->name('getEventIndex');
 });
 
