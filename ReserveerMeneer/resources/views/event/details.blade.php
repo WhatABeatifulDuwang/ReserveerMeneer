@@ -22,6 +22,11 @@
                             Ga terug
                         </a>
                     </div>
+                    <div class=" text-right">
+                        <a href="{{ route('getEventReservation', $event->id) }}" class="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow">
+                            Maak een reservering
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -13,13 +13,24 @@ class CreateReservationTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservation', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('event_id');
+
+            $table->foreign('event_id')
+                ->references('id')
+                ->on('events')
+                ->onDelete('cascade');
+
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('address');
-            $table->timestamp('date');
-            $table->integer('amount');
+            $table->string('email');
+            $table->string('img_path')
+                ->default('-');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
+            $table->integer('ticket_number')
+                ->default(0);
+            $table->float('total_price');
             $table->timestamps();
         });
     }

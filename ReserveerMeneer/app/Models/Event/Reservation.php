@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Models\Restaurant;
+namespace App\Models\Event;
 
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,11 +12,14 @@ class Reservation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'email',
-        'address',
-        'date',
-        'amount',
+        "event_id",
+        "name",
+        "email",
+        "img",
+        "start_date",
+        "end_date",
+        "ticket_number",
+        "total_price"
     ];
 
     public function restaurant(){

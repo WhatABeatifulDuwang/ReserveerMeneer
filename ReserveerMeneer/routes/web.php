@@ -28,6 +28,8 @@ require __DIR__ . '/auth.php';
 
 Route::prefix('events-films')->group(function () {
     Route::get('/events', '\App\Http\Controllers\EventController@index')->name('getEventIndex');
-    Route::get('/{id}/evenement-details', '\App\Http\Controllers\EventController@details')->name('getEventDetails');
+    Route::get('/{id}/event-details', '\App\Http\Controllers\EventController@details')->name('getEventDetails');
+    Route::get('/{id}/event-reservation', '\App\Http\Controllers\EventController@reservationDetails')->name('getEventReservation');
+    Route::post('/{id}/event-reservation', '\App\Http\Controllers\EventController@makeReservation')->name('postEventReservation');
 });
 

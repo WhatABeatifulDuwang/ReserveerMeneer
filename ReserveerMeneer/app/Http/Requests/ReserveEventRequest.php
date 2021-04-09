@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Event;
+use App\Models\Event\Event;
 use DateTime;
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -40,5 +40,14 @@ class EventSeeder extends Seeder
             'start_date' => '2021-05-02 12:00:00',
             'end_date' => '2021-05-09 18:00:00',
         ]);
+
+        Event::create([
+            'name' => 'Optreden van Hans',
+            'description' => 'Luister 3 dagen lang naar Hans Bieber.',
+            'price' => '30.00',
+            'max_tickets' => '20',
+            'start_date' => '2021-09-01 16:00:00',
+            'end_date' => '2021-09-04 16:00:00',
+        ]);
     }
 }
