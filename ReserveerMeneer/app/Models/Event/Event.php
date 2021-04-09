@@ -13,10 +13,10 @@ class Event extends Model
 
     protected $fillable = [
         'name',
-        'date',
-        'duration',
-        'address',
-        'language',
+        'price',
+        'start_date',
+        'end_date',
+        'max_tickets'
     ];
 
     public function tickets(){
