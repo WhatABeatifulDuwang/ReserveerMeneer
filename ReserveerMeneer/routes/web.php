@@ -22,14 +22,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/event', [EventController::class, 'index']);
+Route::get('/events', '\App\Http\Controllers\EventController@index');
 
 require __DIR__ . '/auth.php';
 
-Route::prefix('evenementen')->group(function () {
-    Route::get('/', 'EventController@index')->name('getEventIndex');
+Route::prefix('events-films')->group(function () {
+    Route::get('/events', '\App\Http\Controllers\EventController@index')->name('getEventIndex');
+    Route::get('/{id}/evenement-details', '\App\Http\Controllers\EventController@details')->name('getEventDetails');
 });
 
-Route::prefix('restaurants')->group(function () {
-    Route::get('/', 'RestaurantController@index')->name('getRestaurantIndex');
-});

@@ -15,4 +15,10 @@ class EventController extends Controller
             'events' => $events
         ]);
     }
+
+    public function details($id)
+    {
+        $event =Event::find($id);
+        return view('event.details', ['event' => $event]);
+    }
 }
