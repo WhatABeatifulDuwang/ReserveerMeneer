@@ -9,6 +9,9 @@
                     <x-nav-link :href="route('getEventIndex')" :active="request()->routeIs('getEventIndex')">
                         {{ __('Events') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('getRestaurantIndex')" :active="request()->routeIs('getRestaurantIndex')">
+                        {{ __('Restaurants') }}
+                    </x-nav-link>
                 </div>
             </div>
 
