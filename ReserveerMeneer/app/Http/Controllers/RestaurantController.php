@@ -44,10 +44,10 @@ class RestaurantController extends Controller
 
     public function makeReservation(ReserveRestaurantRequest $request, $id)
     {
-        $unAvailableSeats = RestaurantReservation::where("date", "=", $request->date)->where("time", "=", $request->time)->count();
+        $count = RestaurantReservation::where("date", "=", $request->date)->where("time", "=", $request->time)->count();
         $add_to_waiting_list = false;
 
-        if ($unAvailableSeats >= 10) {
+        if ($count >= 10) {
             $add_to_waiting_list = true;
         }
 
@@ -68,5 +68,30 @@ class RestaurantController extends Controller
             return redirect('/restaurants')->with('status', "Bedankt voor je reservering op " . $request->date . " om " . $request->time . ". Het is erg druk op dit moment, u staat op de wachtlijst.");
         }
         return redirect('/restaurants')->with('status', "Bedankt voor je reservering op " . $request->date . " om " . $request->time . "!");
+    }
+
+    public function dashboard(Request $request)
+    {
+        $date = date("Y-m-d");
+        $restaurant = null;
+
+        if ($request->restaurant != null) {
+            $restaurant = Restaurant::find($request->restaurant);
+            if ($restaurant == null) {
+                return redirect('/dashboard')->with('status', "Het gekozen restaurant bestaat niet!");
+            }
+        } else {
+            $restaurant = Restaurant::first();
+        }
+
+        if ($request->date != null) {
+            $date = $request->date;
+        }
+
+        $restaurants = Restaurant::all();
+
+        $reservations = RestaurantReservation::where("restaurant_id", "=", $restaurant->id)->where("date", "=", $date)->get();
+
+        return view('restaurant.dashboard', ["restaurants" => $restaurants, "reservations" => $reservations, "restaurant" => $restaurant, "date" => $date]);
     }
 }

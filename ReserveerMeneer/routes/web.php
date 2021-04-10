@@ -37,4 +37,5 @@ Route::prefix('restaurants')->group(function () {
     Route::get('/', 'RestaurantController@index')->name('getRestaurantIndex');
     Route::get('/{id}/reservation', 'RestaurantController@details')->name('getRestaurantReservation');
     Route::post('/{id}/reservation', 'RestaurantController@makeReservation')->name('postRestaurantReservation');
+    Route::get('/dashboard', 'RestaurantController@dashboard')->middleware(['auth'])->name('dashboard');
 });
