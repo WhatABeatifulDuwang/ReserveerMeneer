@@ -23,6 +23,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+
 require __DIR__ . '/auth.php';
 
 Route::prefix('events-films')->group(function () {
@@ -33,5 +34,7 @@ Route::prefix('events-films')->group(function () {
 });
 
 Route::prefix('restaurants')->group(function () {
-    Route::get('/restaurants', 'RestaurantController@index')->name('getRestaurantIndex');
+    Route::get('/', 'RestaurantController@index')->name('getRestaurantIndex');
+    Route::get('/{id}/reservation', 'RestaurantController@details')->name('getRestaurantReservation');
+    Route::post('/{id}/reservation', 'RestaurantController@makeReservation')->name('postRestaurantReservation');
 });
