@@ -12,10 +12,8 @@ class Seat extends Model
     use HasFactory;
 
     protected $fillable = [
-        'reserved',
+        "hall_id",
+        "x",
+        "y",
     ];
-
-    public function hall(){
-        return $this->hasOne(Hall::class);
-    }
 }

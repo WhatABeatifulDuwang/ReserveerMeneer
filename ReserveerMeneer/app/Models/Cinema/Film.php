@@ -12,15 +12,10 @@ class Film extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'date',
+        "hall_id",
+        "name",
+        "description",
+        "start_date",
+        "end_date",
     ];
-
-    public function hall(){
-        return $this->hasOne(Hall::class);
-    }
-
-    public function seats(){
-        return $this->hasMany(Seat::class);
-    }
 }

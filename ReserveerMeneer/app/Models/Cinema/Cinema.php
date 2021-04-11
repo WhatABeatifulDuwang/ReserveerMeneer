@@ -14,9 +14,6 @@ class Cinema extends Model
     protected $fillable = [
         'name',
         'address',
+        'city'
     ];
-
-    public function halls(){
-        return $this->hasMany(Hall::class);
-    }
 }

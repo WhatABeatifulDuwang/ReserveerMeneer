@@ -12,6 +12,9 @@
                     <x-nav-link :href="route('getRestaurantIndex')" :active="request()->routeIs('getRestaurantIndex')">
                         {{ __('Restaurants') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('getFilmIndex')" :active="request()->routeIs('getFilmIndex')">
+                        {{ __('Films') }}
+                    </x-nav-link>
                 </div>
             </div>
 
