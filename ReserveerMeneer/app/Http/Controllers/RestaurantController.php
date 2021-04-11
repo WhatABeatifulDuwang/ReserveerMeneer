@@ -27,6 +27,38 @@ class RestaurantController extends Controller
         return view('restaurant.index', ['restaurants' => $restaurants, "categories" => $categories]);
     }
 
+    public function indexAdmin()
+    {
+        $restaurants = Restaurant::all();
+
+        return view('restaurantAdmin.index', [
+            'restaurants' => $restaurants
+        ]);
+    }
+
+    public function create()
+    {
+        return view('restaurantAdmin.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'price' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'max_tickets' => 'required'
+        ]);
+
+        Restaurant::create($request->all());
+
+        return redirect()->route('getRestaurantAdminIndex')->with('success', 'Het restaurant is succesvol aangemaakt!');
+    }
+
     public function details($id)
     {
         $restaurant = Restaurant::find($id);
@@ -40,6 +72,40 @@ class RestaurantController extends Controller
         else {
             return redirect("/restaurants");
         }
+    }
+
+    public function edit($id)
+    {
+        $restaurant = Event::find($id);
+        return view('restaurantAdmin.edit', ['restaurant' => $restaurant]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $restaurant = Restaurant::find($id);
+        $request->validate([
+            "name" => 'required',
+            "type" => 'required',
+            "monday_opening_time" => 'required',
+            "monday_closing_time" => 'required',
+            "tuesday_opening_time" => 'required',
+            "tuesday_closing_time" => 'required',
+            "wednesday_opening_time" => 'required',
+            "wednesday_closing_time" => 'required',
+            "thursday_opening_time" => 'required',
+            "thursday_closing_time" => 'required',
+            "friday_opening_time" => 'required',
+            "friday_closing_time" => 'required',
+            "saturday_opening_time" => 'required',
+            "saturday_closing_time" => 'required',
+            "sunday_opening_time" => 'required',
+            "sunday_closing_time" => 'required',
+            "amount_of_seats" => 'required',
+        ]);
+
+        $restaurant->update($request->all());
+
+        return redirect()->route('getRestaurantAdminIndex')->with('success', 'Het restaurant is succesvol bijgewerkt!');
     }
 
     public function makeReservation(ReserveRestaurantRequest $request, $id)
@@ -93,5 +159,12 @@ class RestaurantController extends Controller
         $reservations = RestaurantReservation::where("restaurant_id", "=", $restaurant->id)->where("date", "=", $date)->get();
 
         return view('restaurant.dashboard', ["restaurants" => $restaurants, "reservations" => $reservations, "restaurant" => $restaurant, "date" => $date]);
+    }
+
+    public function destroy(Restaurant $restaurant)
+    {
+        $restaurant->delete();
+
+        return redirect()->route('getRestaurantAdminIndex')->with('success', 'Het restaurant is succesvol verwijderd!');
     }
 }

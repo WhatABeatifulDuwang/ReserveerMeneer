@@ -12,22 +12,79 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events =Event::all();
+        $events = Event::all();
 
         return view('event.index', [
             'events' => $events
         ]);
     }
 
+    public function indexAdmin()
+    {
+        $events = Event::all();
+
+        return view('eventAdmin.index', [
+            'events' => $events
+        ]);
+    }
+
+    public function create()
+    {
+        return view('eventAdmin.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'price' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'max_tickets' => 'required'
+        ]);
+
+        Event::create($request->all());
+
+        return redirect()->route('getEventAdminIndex')->with('success', 'Het evenement is succesvol aangemaakt!');
+    }
+
     public function details($id)
     {
-        $event =Event::find($id);
+        $event = Event::find($id);
         return view('event.details', ['event' => $event]);
+    }
+
+    public function edit($id)
+    {
+        $event = Event::find($id);
+        return view('eventAdmin.edit', ['event' => $event]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $event = Event::find($id);
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'price' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'max_tickets' => 'required'
+        ]);
+
+        $event->update($request->all());
+
+        return redirect()->route('getEventAdminIndex')->with('success', 'Het evenement is succesvol bijgewerkt!');
     }
 
     public function reservationDetails($id)
     {
-        $event =Event::find($id);
+        $event = Event::find($id);
         return view('event.reservation', [
             'event' => $event,
             'id' => $id
@@ -36,7 +93,7 @@ class EventController extends Controller
 
     public function makeReservation(ReserveEventRequest $request, $id)
     {
-        $event =Event::find($id);
+        $event = Event::find($id);
 
         $startDateTime = new DateTime($request->start_date);
         $endDateTime = new DateTime($request->start_date);
@@ -79,5 +136,12 @@ class EventController extends Controller
             'reservation' => $reservation,
             'id' => $id
         ]);
+    }
+
+    public function destroy(Event $event)
+    {
+        $event->delete();
+
+        return redirect()->route('getEventAdminIndex')->with('success', 'Het evenement is succesvol verwijderd!');
     }
 }

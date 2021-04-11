@@ -58,16 +58,14 @@
                                 <div class="grid grid-cols-{{ $maxX + 1 }} gap-4 max-w-screen-md align-middle m-auto">
                                     @for($i = 0; $i < $maxY + 1; $i++)
                                         @for($j = 0; $j < $maxX + 1; $j++)
-                                            <span hidden>{{
-                                                    $seat = $seats->where('x', $j)->where('y', $i)->first()
-                                                }}</span>
+                                            <span hidden>{{$seat = $seats->where('x', $j)->where('y', $i)->first()}}</span>
                                             @if($seat->reserved == false)
                                                 <div class="col-span-1 outline-black hover:bg-gray-300 bg-green-100 cursor-pointer" id="{{ $seat->id }}" onclick="select( {{ $seat->id }} )">
-                                                    O
+                                                    {{ $i }}{{ $j }}
                                                 </div>
                                             @else
                                                 <div class="col-span-1 outline-black bg-red-300" id="{{ $seat->id }}">
-                                                    X
+                                                    {{ $i }}{{ $j }}
                                                 </div>
                                             @endif
                                         @endfor
@@ -110,6 +108,6 @@
 
         let selectedElement = document.getElementById(id)
         selectedElement.classList.add('selected')
-        selectedElement.setAttribute('style', 'background: purple')
+        selectedElement.setAttribute('style', 'background: blue')
     }
 </script>
