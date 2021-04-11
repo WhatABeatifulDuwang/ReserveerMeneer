@@ -4,6 +4,10 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Films') }}
             </h2>
+            <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
+                <a href="{{ route('getFilmCreate') }}"
+                   class="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow">Evenement aanmaken</a>
+            </div>
         </div>
     </x-slot>
 
