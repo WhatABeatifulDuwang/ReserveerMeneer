@@ -38,33 +38,34 @@ class EventController extends Controller
     {
         $event =Event::find($id);
 
-        $startDate = new DateTime($request->start_date);
-        $endDate = new DateTime($request->start_date);
+        $startDateTime = new DateTime($request->start_date);
+        $endDateTime = new DateTime($request->start_date);
         switch ($request->days_count)
         {
             case '2':
-                $startDate->modify('+1 day');
+                $endDateTime->modify('+1 day');
                 break;
             case '3':
-                $endDate = new DateTime($event->end_date);
+                $endDateTime = new DateTime($event->end_date);
             default:
                 break;
         }
-        $interval = $startDate->diff($endDate);
+        $interval = $startDateTime->diff($endDateTime);
         $days = 1 + $interval->format('%a');
 
-        // Save the file locally in storage/public/reservation
         $request->file->store('reservation', 'public');
 
-        // Save hash to db
         Reservation::create([
             'event_id' => $event->id,
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'address' => $request->input('address'),
+            'postal_code' => $request->input('postal_code'),
+            'city' => $request->input('city'),
             'img_path' => $request->file->hashName(),
             'start_date' => $request->input('start_date'),
-            'end_date' => $endDate,
-            'ticket_number',
+            'end_date' => $endDateTime,
+            'ticket_number' => $request->input('ticket_number'),
             'total_price' => $event->price*$days*$request->ticket_number,
         ]);
 

@@ -9,21 +9,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ReserveFilmRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
@@ -52,17 +42,16 @@ class ReserveFilmRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            // check if seat is unoccupied
+
             $filmSeat = FilmSeat::query()->where([
                 ['id', '=', $this->seat_id],
                 ['reserved', '=', '1']
             ])->first();
 
             if ($filmSeat) {
-                $validator->errors()->add('field', 'Deze stoel is al bezet.');
+                $validator->errors()->add('field', 'Deze stoel is al in gebruik.');
             }
 
-            // check if user does not already have a film reservation for this time
             $previousReservations = FilmReservation::query()->where([
                 ['name', '=', $this->name],
                 ['email', '=', $this->email],
@@ -85,7 +74,7 @@ class ReserveFilmRequest extends FormRequest
                     ($newEndDate > $oldStartDate && $newStartDate < $oldEndDate) ||
                     ($newStartDate < $oldStartDate && $newEndDate > $oldEndDate))
                 {
-                    $validator->errors()->add('field', 'Je hebt al een reservatie binnen deze tijd.');
+                    $validator->errors()->add('field', 'Je hebt al gereserveerd binnen deze tijd.');
                 }
             }
         });

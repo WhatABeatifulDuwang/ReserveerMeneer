@@ -8,21 +8,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ReserveEventRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
@@ -38,16 +28,14 @@ class ReserveEventRequest extends FormRequest
     public function messages()
     {
         return [
-            'file.mimes' => 'Dit bestandstype wordt niet ondersteund.',
-            'ticket_number.gt' => 'Het aantal tickets moet positief zijn.'
+            'file.mimes' => 'Upload een png of jpeg bestand.',
+            'ticket_number.gt' => 'Ticket aantal kan niet negatief zijn.'
         ];
     }
 
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            //$date = new DateTime(date("Y-m-d"));
-            //date_modify($date, "+1 day");
             $event = Event::find($this->id);
             $eventStartDate = new DateTime($event->start_date);
             $eventStartDate->setTime(0, 0);
@@ -66,17 +54,16 @@ class ReserveEventRequest extends FormRequest
                 default:
                     break;
             }
-            //var_dump($event);
             if ($reservationStartDate < $eventStartDate) {
-                $validator->errors()->add('field', 'Je reservering kan niet eerder beginnen dan het evenement begint.');
+                $validator->errors()->add('field', 'Je reservering mag niet eerder beginnen dan het evenement begint.');
             }
             if ($reservationEndDate > $eventEndDate) {
-                $validator->errors()->add('field', 'Je reservering kan niet langer duren dan het evenement.');
+                $validator->errors()->add('field', 'Je reservering mag niet langer duren dan het evenement.');
             }
 
             if ($this->ticket_number > $event->max_tickets)
             {
-                $validator->errors()->add('field', 'Je kunt niet meer tickets kopen dan het maximum.');
+                $validator->errors()->add('field', 'Je kunt niet meer zo veel tickets kopen.');
             }
         });
     }

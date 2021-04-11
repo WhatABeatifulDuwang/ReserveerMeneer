@@ -30,7 +30,7 @@ class ReserveRestaurantRequest extends FormRequest
     public function messages()
     {
         return [
-            'date.after_or_equal' => 'De datum van de reservering moet vandaag of later zijn.',
+            'date.after_or_equal' => 'De datum van de reservering moet mag niet in het verleden zijn.',
             'email.email' => 'Er moet een valide emailadres ingevuld worden.',
         ];
     }
@@ -42,7 +42,7 @@ class ReserveRestaurantRequest extends FormRequest
             $minutes = date("i", $unixtime);
 
             if (strcmp($minutes, "00") != 0 && strcmp($minutes, "30") != 0) {
-                $validator->errors()->add('field', 'De tijd van een reservering kan alleen vallen op hele of halve uren (00 of 30).');
+                $validator->errors()->add('field', 'De tijd van een reservering kan alleen per half uur');
             }
 
             $restaurant = Restaurant::find($this->id);
