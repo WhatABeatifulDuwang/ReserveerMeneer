@@ -32,6 +32,7 @@ Route::prefix('events-films')->group(function () {
     Route::get('/{id}/event-details', '\App\Http\Controllers\EventController@details')->name('getEventDetails');
     Route::get('/{id}/event-reservation', '\App\Http\Controllers\EventController@reservationDetails')->name('getEventReservation');
     Route::post('/{id}/event-reservation', '\App\Http\Controllers\EventController@makeReservation')->name('postEventReservation');
+    Route::get('/{id}/event-confirmation', '\App\Http\Controllers\EventController@getConfirmation')->name('getEventConfirmation');
 
     Route::get('/films', 'FilmController@index')->name('getFilmIndex');
     Route::get('/{id}/film-details', '\App\Http\Controllers\FilmController@details')->name('getFilmDetails');
@@ -44,4 +45,10 @@ Route::prefix('restaurants')->group(function () {
     Route::get('/{id}/reservation', 'RestaurantController@details')->name('getRestaurantReservation');
     Route::post('/{id}/reservation', 'RestaurantController@makeReservation')->name('postRestaurantReservation');
     Route::get('/dashboard', 'RestaurantController@dashboard')->middleware(['auth'])->name('dashboard');
+});
+
+Route::prefix('EventReservations')->group(function (){
+    Route::get('/', 'ReservationController@index')->middleware(['auth'])->name('getReservationIndex');
+    Route::get('/csv', 'ReservationController@exportCsv')->middleware(['auth'])->name('exportCsv');
+    Route::get('/json', 'ReservationController@exportJson')->middleware(['auth'])->name('exportJson');
 });

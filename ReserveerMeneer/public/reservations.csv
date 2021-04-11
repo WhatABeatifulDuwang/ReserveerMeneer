@@ -1,0 +1,7 @@
+id,event_id,name,email,address,postal_code,city,img_path,start_date,end_date,ticket_number,total_price,created_at,updated_at
+1,1,"Milan van Oeveren",milanvanoeveren@icloud.com,,,,p6bqc2kwbtbClrAZ43IW3uoybcZDViJikOknHFwF.png,"2021-07-01 00:00:00","2021-07-01 00:00:00",0,5,2021-04-11T18:58:36.000000Z,2021-04-11T18:58:36.000000Z
+2,2,"Milan van Oeveren",milanvanoeveren@icloud.com,,,,MCXTv9Hf5y9xKcEiSep5Es66Dpj3kFG59QOnjqo2.png,"2021-06-01 00:00:00","2021-06-01 00:00:00",0,10,2021-04-11T18:59:43.000000Z,2021-04-11T18:59:43.000000Z
+3,1,"Milan van Oeveren",milanvanoeveren@icloud.com,35,3446BG,Woerden,iPaRjdTOV8VxzQogzHp7r1jTUy6zk62IyXh9tmzp.png,"2021-07-01 00:00:00","2021-07-01 00:00:00",1,5,2021-04-11T19:02:11.000000Z,2021-04-11T19:02:11.000000Z
+4,1,"Milan van Oeveren",milanvanoeveren@icloud.com,35,3446BG,Woerden,szxn0OgMEY9V4SOwIhSG2Wpu5VZZEZcK4cZ5sop9.png,"2021-07-01 00:00:00","2021-07-01 00:00:00",1,5,2021-04-11T19:57:46.000000Z,2021-04-11T19:57:46.000000Z
+5,2,"Milan van Oeveren",milanvanoeveren@icloud.com,35,3446BG,Woerden,9r2Bg6MyXQfFjauYIjPiLcEbFfr0p9xMvKL3mdfp.png,"2021-06-01 00:00:00","2021-06-01 00:00:00",1,10,2021-04-11T20:02:36.000000Z,2021-04-11T20:02:36.000000Z
+6,1,"Milan van Oeveren",milanvanoeveren@icloud.com,35,3446BG,Woerden,CcCDNjlSMuhFmb1jjL7wuPqxlMFq3314xuugkVxu.jpg,"2021-07-01 00:00:00","2021-07-01 00:00:00",1,5,2021-04-11T20:14:06.000000Z,2021-04-11T20:14:06.000000Z

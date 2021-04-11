@@ -18,6 +18,11 @@
                     <x-nav-link :href="route('getFilmIndex')" :active="request()->routeIs('getFilmIndex')">
                         {{ __('Films') }}
                     </x-nav-link>
+                    @auth
+                        <x-nav-link :href="route('getReservationIndex')" :active="request()->routeIs('getReservationIndex')">
+                            {{ __('Event Reserveringen') }}
+                        </x-nav-link>
+                    @endauth
                 </div>
             </div>
 

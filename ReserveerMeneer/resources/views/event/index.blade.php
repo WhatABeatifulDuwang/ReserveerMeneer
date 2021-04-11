@@ -20,8 +20,7 @@
                             <b>Tot: </b>{{ date("d-m h:i", strtotime($event->end_date)) }}
                         </div>
                         <div class="d-flex flex-column justify-content-end w-50 text-right pb-2">
-                            <a href="{{ route('getEventDetails', $event->id) }}"
-                               class="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow">Meer informatie</a>
+                            <a href="{{ route('getEventDetails', $event->id) }}" class="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow">Meer informatie</a>
                         </div>
                     </div>
                     <br>

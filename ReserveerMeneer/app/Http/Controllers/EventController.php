@@ -55,7 +55,7 @@ class EventController extends Controller
 
         $request->file->store('reservation', 'public');
 
-        Reservation::create([
+        $reservation = Reservation::create([
             'event_id' => $event->id,
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -69,6 +69,15 @@ class EventController extends Controller
             'total_price' => $event->price*$days*$request->ticket_number,
         ]);
 
-        return redirect()->route('getEventIndex');
+        return redirect()->route('getEventConfirmation', $reservation->id);
+    }
+
+    public function getConfirmation($id)
+    {
+        $reservation = Reservation::find($id);
+        return view('event.confirmation', [
+            'reservation' => $reservation,
+            'id' => $id
+        ]);
     }
 }
