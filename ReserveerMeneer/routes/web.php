@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\RestaurantController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/events', '\App\Http\Controllers\EventController@index');
 
 require __DIR__ . '/auth.php';
 
@@ -33,3 +33,9 @@ Route::prefix('events-films')->group(function () {
     Route::post('/{id}/event-reservation', '\App\Http\Controllers\EventController@makeReservation')->name('postEventReservation');
 });
 
+Route::prefix('restaurants')->group(function () {
+    Route::get('/', 'RestaurantController@index')->name('getRestaurantIndex');
+    Route::get('/{id}/reservation', 'RestaurantController@details')->name('getRestaurantReservation');
+    Route::post('/{id}/reservation', 'RestaurantController@makeReservation')->name('postRestaurantReservation');
+    Route::get('/dashboard', 'RestaurantController@dashboard')->middleware(['auth'])->name('dashboard');
+});
