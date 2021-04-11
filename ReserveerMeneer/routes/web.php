@@ -26,6 +26,8 @@ Route::get('/dashboard', function () {
 require __DIR__ . '/auth.php';
 
 Route::prefix('events-films')->group(function () {
+    Route::get('/', '\App\Http\Controllers\EventFilmController@index')->name('getEventFilmIndex');
+
     Route::get('/events', '\App\Http\Controllers\EventController@index')->name('getEventIndex');
     Route::get('/{id}/event-details', '\App\Http\Controllers\EventController@details')->name('getEventDetails');
     Route::get('/{id}/event-reservation', '\App\Http\Controllers\EventController@reservationDetails')->name('getEventReservation');

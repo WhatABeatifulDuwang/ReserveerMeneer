@@ -14,13 +14,12 @@ class Event extends Model
     protected $fillable = [
         'name',
         'description',
+        'address',
+        'city',
         'price',
         'start_date',
         'end_date',
         'max_tickets'
     ];
 
-    public function tickets(){
-        return $this->hasMany(Ticket::class);
-    }
 }
