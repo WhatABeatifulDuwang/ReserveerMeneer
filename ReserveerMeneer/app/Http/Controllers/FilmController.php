@@ -21,6 +21,38 @@ class FilmController extends Controller
         ]);
     }
 
+    public function indexAdmin()
+    {
+        $films = Film::all();
+
+        return view('filmAdmin.index', [
+            'films' => $films
+        ]);
+    }
+
+    public function create()
+    {
+        return view('filmAdmin.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'price' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'max_tickets' => 'required'
+        ]);
+
+        Film::create($request->all());
+
+        return redirect()->route('getFilmAdminIndex')->with('success', 'De film is succesvol aangemaakt!');
+    }
+
     public function details($id)
     {
         $film = Film::find($id);
@@ -32,6 +64,28 @@ class FilmController extends Controller
         }
 
         return view('film.details', ['film' => $film, 'cinema' => $cinema]);
+    }
+
+    public function edit($id)
+    {
+        $film = Film::find($id);
+        return view('filmAdmin.edit', ['film' => $film]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $film = Film::find($id);
+        $request->validate([
+            "hall_id" => 'required',
+            "name" => 'required',
+            "description" => 'required',
+            "start_date" => 'required',
+            "end_date" => 'required',
+        ]);
+
+        $film->update($request->all());
+
+        return redirect()->route('getFilmAdminIndex')->with('success', 'De film is succesvol bijgewerkt!');
     }
 
     public function reservationDetails($id)
@@ -95,5 +149,12 @@ class FilmController extends Controller
         }
 
         return redirect()->route('getFilmIndex');
+    }
+
+    public function destroy(Film $film)
+    {
+        $film->delete();
+
+        return redirect()->route('getFilmAdminIndex')->with('success', 'De film is succesvol verwijderd!');
     }
 }
