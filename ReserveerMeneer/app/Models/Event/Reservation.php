@@ -15,18 +15,13 @@ class Reservation extends Model
         "event_id",
         "name",
         "email",
-        "img",
+        "address",
+        "postal_code",
+        "city",
+        "img_path",
         "start_date",
         "end_date",
         "ticket_number",
-        "total_price"
+        "total_price",
     ];
-
-    public function restaurant(){
-        return $this->hasOne(Restaurant::class);
-    }
-
-    public function seats(){
-        return $this->hasMany(Seat::class);
-    }
 }
