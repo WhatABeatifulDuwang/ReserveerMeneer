@@ -44,14 +44,23 @@ class RestaurantController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'price' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'max_tickets' => 'required'
+            "name" => 'required',
+            "type" => 'required',
+            "monday_opening_time" => 'required',
+            "monday_closing_time" => 'required',
+            "tuesday_opening_time" => 'required',
+            "tuesday_closing_time" => 'required',
+            "wednesday_opening_time" => 'required',
+            "wednesday_closing_time" => 'required',
+            "thursday_opening_time" => 'required',
+            "thursday_closing_time" => 'required',
+            "friday_opening_time" => 'required',
+            "friday_closing_time" => 'required',
+            "saturday_opening_time" => 'required',
+            "saturday_closing_time" => 'required',
+            "sunday_opening_time" => 'required',
+            "sunday_closing_time" => 'required',
+            "amount_of_seats" => 'required',
         ]);
 
         Restaurant::create($request->all());
@@ -76,7 +85,7 @@ class RestaurantController extends Controller
 
     public function edit($id)
     {
-        $restaurant = Event::find($id);
+        $restaurant = Restaurant::find($id);
         return view('restaurantAdmin.edit', ['restaurant' => $restaurant]);
     }
 

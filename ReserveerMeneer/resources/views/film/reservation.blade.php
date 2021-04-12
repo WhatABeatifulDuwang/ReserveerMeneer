@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-span-1">
                                 <div class="form-group">
-                                    <input type="text" class="form-control w-full" name="city" placeholder="Stad" value="{{ old('city') }}">
+                                    <input type="text" class="form-control w-full" name="city" placeholder="Plaats" value="{{ old('city') }}">
                                 </div>
                             </div>
 

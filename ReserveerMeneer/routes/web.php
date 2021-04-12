@@ -38,7 +38,7 @@ Route::prefix('events-films')->group(function () {
     Route::get('/event-create', '\App\Http\Controllers\EventController@create')->middleware(['auth'])->name('getEventCreate');
     Route::get('/{id}/event-edit', '\App\Http\Controllers\EventController@edit')->middleware(['auth'])->name('getEventEdit');
     Route::post('/event-store', '\App\Http\Controllers\EventController@store')->middleware(['auth'])->name('postEventStore');
-    Route::post('/{id}/event-update', '\App\Http\Controllers\EventController@update')->middleware(['auth'])->name('postEventEdit');
+    Route::post('/{id}/event-update', '\App\Http\Controllers\EventController@update')->middleware(['auth'])->name('postEventUpdate');
     Route::post('/{id}/event-delete', '\App\Http\Controllers\EventController@delete')->middleware(['auth'])->name('postEventDelete');
 
     Route::get('/films', 'FilmController@index')->name('getFilmIndex');
@@ -50,7 +50,7 @@ Route::prefix('events-films')->group(function () {
     Route::get('/film-create', '\App\Http\Controllers\FilmController@create')->middleware(['auth'])->name('getFilmCreate');
     Route::get('/{id}/film-edit', '\App\Http\Controllers\FilmController@edit')->middleware(['auth'])->name('getFilmEdit');
     Route::post('/film-store', '\App\Http\Controllers\FilmController@store')->middleware(['auth'])->name('postFilmStore');
-    Route::post('/{id}/film-update', '\App\Http\Controllers\FilmController@update')->middleware(['auth'])->name('postFilmEdit');
+    Route::post('/{id}/film-update', '\App\Http\Controllers\FilmController@update')->middleware(['auth'])->name('postFilmUpdate');
     Route::post('/{id}/film-delete', '\App\Http\Controllers\FilmController@delete')->middleware(['auth'])->name('postFilmDelete');
 });
 

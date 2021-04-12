@@ -66,20 +66,22 @@ class EventController extends Controller
     public function update($id, Request $request)
     {
         $event = Event::find($id);
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'price' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'max_tickets' => 'required'
-        ]);
+        $event->name = $request->input('name');
+        $event->description = $request->input('description');
+        $event->address = $request->input('address');
+        $event->city = $request->input('city');
+        $event->price = $request->input('price');
+        $event->max_tickets = $request->input('max_tickets');
 
-        $event->update($request->all());
+        if($request->start_date != null || $request->end_date != null)
+        {
+            $event->start_date = $request->input('start_date');
+            $event->end_date = $request->input('end_date');
+        }
 
-        return redirect()->route('getEventAdminIndex')->with('success', 'Het evenement is succesvol bijgewerkt!');
+        $event->save();
+
+        return redirect()->route('getEventIndex');
     }
 
     public function reservationDetails($id)

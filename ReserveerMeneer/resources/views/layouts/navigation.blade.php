@@ -22,6 +22,15 @@
                         <x-nav-link :href="route('getReservationIndex')" :active="request()->routeIs('getReservationIndex')">
                             {{ __('Event Reserveringen') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('getEventAdminIndex')" :active="request()->routeIs('getEventAdminIndex')">
+                            {{ __('Event beheer') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('getFilmAdminIndex')" :active="request()->routeIs('getFilmAdminIndex')">
+                            {{ __('Film beheer') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('getRestaurantAdminIndex')" :active="request()->routeIs('getRestaurantAdminIndex')">
+                            {{ __('Restaurant beheer') }}
+                        </x-nav-link>
                     @endauth
                 </div>
             </div>

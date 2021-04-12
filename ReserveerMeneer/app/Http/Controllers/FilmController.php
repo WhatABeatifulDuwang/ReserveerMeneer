@@ -38,14 +38,11 @@ class FilmController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'hall_id' => 'required',
             'name' => 'required',
             'description' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'price' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'max_tickets' => 'required'
         ]);
 
         Film::create($request->all());
