@@ -16,4 +16,8 @@ class Cinema extends Model
         'address',
         'city'
     ];
+
+    public function halls(){
+        return $this->hasMany(Hall::class);
+    }
 }

@@ -4,6 +4,7 @@
 namespace App\Models\Restaurant;
 
 
+use App\Models\Event\Reservation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,4 +31,8 @@ class Restaurant extends Model
         "sunday_closing_time",
         "amount_of_seats",
     ];
+
+    public function reservations(){
+        return $this->hasMany(Reservation::class);
+    }
 }

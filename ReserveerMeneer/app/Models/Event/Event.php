@@ -22,4 +22,7 @@ class Event extends Model
         'max_tickets'
     ];
 
+    public function reservations(){
+        return $this->hasManyThrough(Reservation::class, Ticket::class, 'event_id', 'id', 'id', 'reservation_id');
+    }
 }

@@ -18,4 +18,12 @@ class Film extends Model
         "start_date",
         "end_date",
     ];
+
+    public function hall(){
+        return $this->hasOne(Hall::class, 'id', 'hall_id');
+    }
+
+    public function seats(){
+        return $this->hasManyThrough(FilmSeat::class, FilmReservation::class, 'film_id', 'id', 'id', 'filmSeat_id');
+    }
 }

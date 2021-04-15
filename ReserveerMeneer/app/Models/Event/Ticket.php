@@ -17,6 +17,6 @@ class Ticket extends Model
     ];
 
     public function event(){
-        return $this->hasOne(Event::class);
+        return $this->hasOneThrough(Event::class, Reservation::class, 'ticket_id', 'id', 'id', 'event_id');
     }
 }

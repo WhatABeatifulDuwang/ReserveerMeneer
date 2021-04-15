@@ -24,4 +24,12 @@ class Reservation extends Model
         "ticket_number",
         "total_price",
     ];
+
+    public function event(){
+        return $this->hasOne(Event::class, 'id', 'event_id');
+    }
+
+    public function reservations(){
+        return $this->hasMany(Reservation::class, 'id', 'reservation_id');
+    }
 }

@@ -21,4 +21,8 @@ class RestaurantReservation extends Model
         "city",
         "waiting_list",
     ];
+
+    public function restaurant(){
+        return $this->hasOne(Restaurant::class, 'id', 'restaurant_id');
+    }
 }

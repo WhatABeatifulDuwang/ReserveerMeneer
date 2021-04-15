@@ -18,4 +18,12 @@ class FilmReservation extends Model
         "postal_code",
         "city",
     ];
+
+    public function film(){
+        return $this->hasOne(Film::class, 'id', 'film_id');
+    }
+
+    public function seats(){
+        return $this->hasMany(FilmSeat::class);
+    }
 }
