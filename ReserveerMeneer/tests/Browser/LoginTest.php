@@ -8,16 +8,33 @@ use Tests\DuskTestCase;
 
 class LoginTest extends DuskTestCase
 {
-    /**
-     * A Dusk test example.
-     *
-     * @return void
-     */
-    public function testExample()
+    public function test_can_render_login_page()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/login')
-                    ->assertSee('log in');
+                    ->assertSee('Email')
+                    ->assertSee('Password');
+        });
+    }
+
+    public function testLogin()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/login')
+                ->type('email', 'admin@hotmail.com')
+                ->type('password', 'password')
+                ->click('.font-semibold') //button
+                ->assertSee('Welkom!');
+        });
+    }
+
+    public function testLogout()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                ->assertSee('Welkom!')
+                ->click('.btn')
+                ->assertSee('Log in');
         });
     }
 }
