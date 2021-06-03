@@ -16,7 +16,6 @@ class EventFilmController extends Controller
         $eventsAndFilms = $this->getEventsAndFilms($request);
 
         $name = array_column($eventsAndFilms, 'name');
-        $location = array_column($eventsAndFilms, 'city');
         $start_time = array_column($eventsAndFilms, 'start_date');
 
         if ($request->start_time_sort) {

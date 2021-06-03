@@ -19,11 +19,11 @@
             @endif
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form action="{{ route('postRestaurantUpdate') }}" method="POST">
+                    <form action="{{ route('postRestaurantUpdate', $restaurant->id) }}" method="POST">
                         @csrf
                         <div class="grid grid-cols-2 gap-4">
                             <div class="col-span-1">
-                                <label>Titel</label>
+                                <label>Naam</label>
                                 <div class="form-group">
                                     <input type="text" name="name" class="form-control w-full"
                                            @if(old('name') != null)
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                             <div class="col-span-2">
-                                <label>Beschrijving</label>
+                                <label>Type</label>
                                 <div class="form-group">
                                     <input type="text" name="type" class="form-control w-full" placeholder="Type"
                                            @if(old('type') != null)
@@ -48,21 +48,21 @@
                                 <label>Maandag openingstijd</label>
                                 <div class="form-group">
                                     <input type="time" name="monday_opening" class="form-control w-full text-gray-500"
-                                           @if(old('monday_opening_time') != null)
-                                           value="{{ old('monday_opening_time') }}"
+                                           @if(old('monday_opening') != null)
+                                           value="{{ old('monday_opening') }}"
                                            @else
-                                           value="{{ strtotime($restaurant->monday_opening_time)}}"
+                                           value="{{ $restaurant->monday_opening }}"
                                         @endif>
                                 </div>
                             </div>
                             <div class="col-span-1">
                                 <label>Maandag sluitingstijd</label>
                                 <div class="form-group">
-                                    <input type="time" name="monday_opening" class="form-control w-full text-gray-500"
-                                           @if(old('monday_closing_time') != null)
-                                           value="{{ old('monday_closing_time') }}"
+                                    <input type="time" name="monday_closing" class="form-control w-full text-gray-500"
+                                           @if(old('monday_closing') != null)
+                                           value="{{ old('monday_closing') }}"
                                            @else
-                                           value="{{ strtotime($restaurant->monday_closing_time)}}"
+                                           value="{{ $restaurant->monday_closing }}"
                                         @endif>
                                 </div>
                             </div>
@@ -70,10 +70,10 @@
                                 <label>Dinsdag openingstijd</label>
                                 <div class="form-group">
                                     <input type="time" name="tuesday_opening" class="form-control w-full text-gray-500"
-                                           @if(old('tuesday_opening_time') != null)
-                                           value="{{ old('tuesday_opening_time') }}"
+                                           @if(old('tuesday_opening') != null)
+                                           value="{{ old('tuesday_opening') }}"
                                            @else
-                                           value="{{ strtotime($restaurant->tuesday_opening_time)}}"
+                                           value="{{ $restaurant->tuesday_opening }}"
                                         @endif>
                                 </div>
                             </div>
@@ -81,10 +81,10 @@
                                 <label>Dinsdag sluitingstijd</label>
                                 <div class="form-group">
                                     <input type="time" name="tuesday_closing" class="form-control w-full text-gray-500"
-                                           @if(old('tuesday_closing_time') != null)
-                                           value="{{ old('tuesday_closing_time') }}"
+                                           @if(old('tuesday_closing') != null)
+                                           value="{{ old('tuesday_closing') }}"
                                            @else
-                                           value="{{ strtotime($restaurant->tuesday_closing_time)}}"
+                                           value="{{ $restaurant->tuesday_closing }}"
                                         @endif>
                                 </div>
                             </div>
@@ -92,10 +92,10 @@
                                 <label>Woensdag openingstijd</label>
                                 <div class="form-group">
                                     <input type="time" name="wednesday_opening" class="form-control w-full text-gray-500"
-                                           @if(old('wednesday_opening_time') != null)
-                                           value="{{ old('wednesday_opening_time') }}"
+                                           @if(old('wednesday_opening') != null)
+                                           value="{{ old('wednesday_opening') }}"
                                            @else
-                                           value="{{ strtotime($restaurant->wednesday_opening_time)}}"
+                                           value="{{ $restaurant->wednesday_opening }}"
                                         @endif>
                                 </div>
                             </div>
@@ -103,10 +103,10 @@
                                 <label>Woensdag sluitingstijd</label>
                                 <div class="form-group">
                                     <input type="time" name="wednesday_closing" class="form-control w-full text-gray-500"
-                                           @if(old('wednesday_closing_time') != null)
-                                           value="{{ old('wednesday_closing_time') }}"
+                                           @if(old('wednesday_closing') != null)
+                                           value="{{ old('wednesday_closing') }}"
                                            @else
-                                           value="{{ strtotime($restaurant->wednesday_closing_time)}}"
+                                           value="{{ $restaurant->wednesday_closing }}"
                                         @endif>
                                 </div>
                             </div>
@@ -114,21 +114,21 @@
                                 <label>Donderdag openingstijd</label>
                                 <div class="form-group">
                                     <input type="time" name="thursday_opening" class="form-control w-full text-gray-500"
-                                           @if(old('thursday_opening_time') != null)
-                                           value="{{ old('thursday_opening_time') }}"
+                                           @if(old('thursday_opening') != null)
+                                           value="{{ old('thursday_opening') }}"
                                            @else
-                                           value="{{ strtotime($restaurant->thursday_opening_time)}}"
+                                           value="{{ $restaurant->thursday_opening }}"
                                         @endif>
                                 </div>
                             </div>
                             <div class="col-span-1">
-                                <label>Donderdagdag sluitingstijd</label>
+                                <label>Donderdag sluitingstijd</label>
                                 <div class="form-group">
                                     <input type="time" name="thursday_closing" class="form-control w-full text-gray-500"
-                                           @if(old('thursday_closing_time') != null)
-                                           value="{{ old('thursday_closing_time') }}"
+                                           @if(old('thursday_closing') != null)
+                                           value="{{ old('thursday_closing') }}"
                                            @else
-                                           value="{{ strtotime($restaurant->thursday_closing_time)}}"
+                                           value="{{ $restaurant->thursday_closing }}"
                                         @endif>
                                 </div>
                             </div>
@@ -136,10 +136,10 @@
                                 <label>Vrijdag openingstijd</label>
                                 <div class="form-group">
                                     <input type="time" name="friday_opening" class="form-control w-full text-gray-500"
-                                           @if(old('friday_opening_time') != null)
-                                           value="{{ old('friday_opening_time') }}"
+                                           @if(old('friday_opening') != null)
+                                           value="{{ old('friday_opening') }}"
                                            @else
-                                           value="{{ strtotime($restaurant->friday_opening_time)}}"
+                                           value="{{ $restaurant->friday_opening }}"
                                         @endif>
                                 </div>
                             </div>
@@ -147,10 +147,10 @@
                                 <label>Vrijdag sluitingstijd</label>
                                 <div class="form-group">
                                     <input type="time" name="friday_closing" class="form-control w-full text-gray-500"
-                                           @if(old('friday_closing_time') != null)
-                                           value="{{ old('friday_closing_time') }}"
+                                           @if(old('friday_closing') != null)
+                                           value="{{ old('friday_closing') }}"
                                            @else
-                                           value="{{ strtotime($restaurant->friday_closing_time)}}"
+                                           value="{{ $restaurant->friday_closing }}"
                                         @endif>
                                 </div>
                             </div>
@@ -158,10 +158,10 @@
                                 <label>Zaterdag openingstijd</label>
                                 <div class="form-group">
                                     <input type="time" name="saturday_opening" class="form-control w-full text-gray-500"
-                                           @if(old('saturday_opening_time') != null)
-                                           value="{{ old('saturday_opening_time') }}"
+                                           @if(old('saturday_opening') != null)
+                                           value="{{ old('saturday_opening') }}"
                                            @else
-                                           value="{{ strtotime($restaurant->saturday_opening_time)}}"
+                                           value="{{ $restaurant->saturday_opening }}"
                                         @endif>
                                 </div>
                             </div>
@@ -169,10 +169,10 @@
                                 <label>Zaterdag sluitingstijd</label>
                                 <div class="form-group">
                                     <input type="time" name="saturday_closing" class="form-control w-full text-gray-500"
-                                           @if(old('saturday_closing_time') != null)
-                                           value="{{ old('saturday_closing_time') }}"
+                                           @if(old('saturday_closing') != null)
+                                           value="{{ old('saturday_closing') }}"
                                            @else
-                                           value="{{ strtotime($restaurant->saturday_closing_time)}}"
+                                           value="{{ $restaurant->saturday_closing }}"
                                         @endif>
                                 </div>
                             </div>
@@ -180,28 +180,28 @@
                                 <label>Zondag openingstijd</label>
                                 <div class="form-group">
                                     <input type="time" name="sunday_opening" class="form-control w-full text-gray-500"
-                                           @if(old('sunday_opening_time') != null)
-                                           value="{{ old('sunday_opening_time') }}"
+                                           @if(old('sunday_opening') != null)
+                                           value="{{ old('sunday_opening') }}"
                                            @else
-                                           value="{{ strtotime($restaurant->sunday_opening_time)}}"
+                                           value="{{ $restaurant->sunday_opening }}"
                                         @endif>
                                 </div>
                             </div>
                             <div class="col-span-1">
-                                <label>Maandag sluitingstijd</label>
+                                <label>Zondag sluitingstijd</label>
                                 <div class="form-group">
                                     <input type="time" name="sunday_closing" class="form-control w-full text-gray-500"
-                                           @if(old('sunday_closing_time') != null)
-                                           value="{{ old('sunday_closing_time') }}"
+                                           @if(old('sunday_closing') != null)
+                                           value="{{ old('sunday_closing') }}"
                                            @else
-                                           value="{{ strtotime($restaurant->sunday_closing_time)}}"
+                                           value="{{ $restaurant->sunday_closing }}"
                                         @endif>
                                 </div>
                             </div>
-                            <div class="col-span-1">
+                            <div class="col-span-2">
                                 <label>Max. aantal stoelen</label>
                                 <div class="form-group">
-                                    <input type="number" name="max_seats" class="form-control w-full" placeholder="Max. aantal stoelen"
+                                    <input type="number" name="amount_of_seats" class="form-control w-full" placeholder="Max. aantal stoelen"
                                            @if(old('amount_of_seats') != null)
                                            value="{{ old('amount_of_seats') }}"
                                            @else

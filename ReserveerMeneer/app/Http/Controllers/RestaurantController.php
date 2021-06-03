@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Http\Requests\Restaurant\ReserveRestaurantRequest;
+use App\Http\Requests\Restaurant\RestaurantRequest;
 use App\Models\Restaurant\Restaurant;
 use App\Models\Restaurant\RestaurantReservation;
+use App\Http\Requests\Restaurant\ReserveRestaurantRequest;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
@@ -42,29 +42,13 @@ class RestaurantController extends Controller
         return view('restaurantAdmin.create');
     }
 
-    public function store(Request $request)
+    public function store(RestaurantRequest $request)
     {
-        $request->validate([
-            "name" => 'required',
-            "type" => 'required',
-            "monday_opening_time" => 'required',
-            "monday_closing_time" => 'required',
-            "tuesday_opening_time" => 'required',
-            "tuesday_closing_time" => 'required',
-            "wednesday_opening_time" => 'required',
-            "wednesday_closing_time" => 'required',
-            "thursday_opening_time" => 'required',
-            "thursday_closing_time" => 'required',
-            "friday_opening_time" => 'required',
-            "friday_closing_time" => 'required',
-            "saturday_opening_time" => 'required',
-            "saturday_closing_time" => 'required',
-            "sunday_opening_time" => 'required',
-            "sunday_closing_time" => 'required',
-            "amount_of_seats" => 'required',
-        ]);
+        $restaurant = new Restaurant();
 
-        Restaurant::create($request->all());
+        $restaurant = $this->setRestaurant($restaurant, $request);
+
+        $restaurant->save();
 
         return redirect()->route('getRestaurantAdminIndex')->with('success', 'Het restaurant is succesvol aangemaakt!');
     }
@@ -91,31 +75,13 @@ class RestaurantController extends Controller
             ->with('restaurant', $restaurant);
     }
 
-    public function update($id, Request $request)
+    public function update($id, RestaurantRequest $request)
     {
         $restaurant = Restaurant::findOrFail($id);
 
-        $request->validate([
-            "name" => 'required',
-            "type" => 'required',
-            "monday_opening_time" => 'required',
-            "monday_closing_time" => 'required',
-            "tuesday_opening_time" => 'required',
-            "tuesday_closing_time" => 'required',
-            "wednesday_opening_time" => 'required',
-            "wednesday_closing_time" => 'required',
-            "thursday_opening_time" => 'required',
-            "thursday_closing_time" => 'required',
-            "friday_opening_time" => 'required',
-            "friday_closing_time" => 'required',
-            "saturday_opening_time" => 'required',
-            "saturday_closing_time" => 'required',
-            "sunday_opening_time" => 'required',
-            "sunday_closing_time" => 'required',
-            "amount_of_seats" => 'required',
-        ]);
+        $restaurant = $this->setRestaurant($restaurant, $request);
 
-        $restaurant->update($request->all());
+        $restaurant->save();
 
         return redirect()->route('getRestaurantAdminIndex')->with('success', 'Het restaurant is succesvol bijgewerkt!');
     }
@@ -131,14 +97,14 @@ class RestaurantController extends Controller
 
         RestaurantReservation::create([
             "restaurant_id" => $id,
-            "date" => $request->date,
-            "time" => $request->time,
-            "firstname" => $request->firstname,
-            "lastname" => $request->lastname,
-            "email" => $request->email,
-            "address" => $request->address,
-            "postal_code" => $request->postal_code,
-            "city" => $request->city,
+            "date" => $request->input('date'),
+            "time" => $request->input('time'),
+            "firstname" => $request->input('firstname'),
+            "lastname" => $request->input('lastname'),
+            "email" => $request->input('email'),
+            "address" => $request->input('address'),
+            "postal_code" => $request->input('postal_code'),
+            "city" => $request->input('city'),
             "waiting_list" => $add_to_waiting_list,
         ]);
 
@@ -185,5 +151,28 @@ class RestaurantController extends Controller
 
         return redirect()->route('getRestaurantAdminIndex')
             ->with('success', 'Het restaurant is succesvol verwijderd!');
+    }
+
+    public function setRestaurant(Restaurant $restaurant, RestaurantRequest $request)
+    {
+        $restaurant->name = $request->input('name');
+        $restaurant->type = $request->input('type');
+        $restaurant->monday_opening = $request->input('monday_opening');
+        $restaurant->monday_closing = $request->input('monday_closing');
+        $restaurant->tuesday_opening = $request->input('tuesday_opening');
+        $restaurant->tuesday_closing = $request->input('tuesday_closing');
+        $restaurant->wednesday_opening = $request->input('wednesday_opening');
+        $restaurant->wednesday_closing = $request->input('wednesday_closing');
+        $restaurant->thursday_opening = $request->input('thursday_opening');
+        $restaurant->thursday_closing = $request->input('thursday_closing');
+        $restaurant->friday_opening = $request->input('friday_opening');
+        $restaurant->friday_closing = $request->input('friday_closing');
+        $restaurant->saturday_opening = $request->input('saturday_opening');
+        $restaurant->saturday_closing = $request->input('saturday_closing');
+        $restaurant->sunday_opening = $request->input('sunday_opening');
+        $restaurant->sunday_closing = $request->input('sunday_closing');
+        $restaurant->amount_of_seats = $request->input('amount_of_seats');
+
+        return $restaurant;
     }
 }

@@ -56,9 +56,9 @@ Route::prefix('events-films')->group(function () {
 
 Route::prefix('restaurants')->group(function () {
     Route::get('/', 'RestaurantController@index')->name('getRestaurantIndex');
-    Route::get('/{id}/reservation', 'RestaurantController@details')->name('getRestaurantReservation');
-    Route::post('/{id}/reservation', 'RestaurantController@makeReservation')->name('postRestaurantReservation');
-    Route::get('/dashboard', 'RestaurantController@dashboard')->middleware(['auth'])->name('dashboard');
+    Route::get('/{id}/reservation', '\App\Http\Controllers\RestaurantController@details')->name('getRestaurantReservation');
+    Route::post('/{id}/reservation', '\App\Http\Controllers\RestaurantController@makeReservation')->name('postRestaurantReservation');
+    Route::get('/dashboard', '\App\Http\Controllers\RestaurantController@dashboard')->middleware(['auth'])->name('dashboard');
 
     Route::get('/restaurantsAdmin', '\App\Http\Controllers\RestaurantController@indexAdmin')->middleware(['auth'])->name('getRestaurantAdminIndex');
     Route::get('/restaurant-create', '\App\Http\Controllers\RestaurantController@create')->middleware(['auth'])->name('getRestaurantCreate');
