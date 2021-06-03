@@ -17,6 +17,9 @@
       <excludeFolder url="file://$MODULE_DIR$/ReserveerMeneer/vendor/symfony/http-kernel" />
       <excludeFolder url="file://$MODULE_DIR$/ReserveerMeneer/vendor/symfony/translation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/ReserveerMeneer/vendor/league/commonmark" />
+      <excludeFolder url="file://$MODULE_DIR$/ReserveerMeneer/vendor/staudenmeir/dusk-updater" />
+      <excludeFolder url="file://$MODULE_DIR$/ReserveerMeneer/vendor/php-webdriver/webdriver" />
+      <excludeFolder url="file://$MODULE_DIR$/ReserveerMeneer/vendor/laravel/dusk" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
