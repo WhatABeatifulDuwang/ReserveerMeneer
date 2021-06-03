@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Http\Requests\ReserveRestaurantRequest;
+use App\Http\Requests\Restaurant\ReserveRestaurantRequest;
 use Faker\Factory;
 use Illuminate\Support\Facades\Validator;
 use Tests\TestCase;

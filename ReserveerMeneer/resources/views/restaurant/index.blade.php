@@ -44,43 +44,43 @@
                                     <strong>
                                         Maandag:
                                     </strong>
-                                    {{$restaurant->monday_opening_time}} - {{$restaurant->monday_closing_time}}
+                                    {{$restaurant->monday_opening}} - {{$restaurant->monday_closing}}
                                 </div>
                                 <div>
                                     <strong>
                                         Dinsdag:
                                     </strong>
-                                    {{$restaurant->tuesday_opening_time}} - {{$restaurant->tuesday_closing_time}}
+                                    {{$restaurant->tuesday_opening}} - {{$restaurant->tuesday_closing}}
                                 </div>
                                 <div>
                                     <strong>
                                         Woensdag:
                                     </strong>
-                                    {{$restaurant->wednesday_opening_time}} - {{$restaurant->wednesday_closing_time}}
+                                    {{$restaurant->wednesday_opening}} - {{$restaurant->wednesday_closing}}
                                 </div>
                                 <div>
                                     <strong>
                                         Donderdag:
                                     </strong>
-                                    {{$restaurant->thursday_opening_time}} - {{$restaurant->thursday_closing_time}}
+                                    {{$restaurant->thursday_opening}} - {{$restaurant->thursday_closing}}
                                 </div>
                                 <div>
                                     <strong>
                                         Vrijdag:
                                     </strong>
-                                    {{$restaurant->friday_opening_time}} - {{$restaurant->friday_closing_time}}
+                                    {{$restaurant->friday_opening}} - {{$restaurant->friday_closing}}
                                 </div>
                                 <div>
                                     <strong>
                                         Zaterdag:
                                     </strong>
-                                    {{$restaurant->saturday_opening_time}} - {{$restaurant->saturday_closing_time}}
+                                    {{$restaurant->saturday_opening}} - {{$restaurant->saturday_closing}}
                                 </div>
                                 <div>
                                     <strong>
                                         Zondag:
                                     </strong>
-                                    {{$restaurant->sunday_opening_time}} - {{$restaurant->sunday_closing_time}}
+                                    {{$restaurant->sunday_opening}} - {{$restaurant->sunday_closing}}
                                 </div>
                                 <div>
                                     <strong>

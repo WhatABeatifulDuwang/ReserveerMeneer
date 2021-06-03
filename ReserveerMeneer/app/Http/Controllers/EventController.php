@@ -68,7 +68,6 @@ class EventController extends Controller
     public function update($id, Request $request)
     {
         $event = Event::findOrFail($id);
-        $this->decrypt($event);
 
         $event->name = $request->input('name');
         $event->description = $request->input('description');

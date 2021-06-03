@@ -49,50 +49,50 @@ class ReserveRestaurantRequest extends FormRequest
 
             $day_of_week = date('w', strtotime($unixtime));
 
-            $open_time = null;
-            $close_time = null;
+            $open = null;
+            $close = null;
 
             switch ($day_of_week) {
                 case 0:
-                    $open_time = strtotime($restaurant->sunday_opening_time);
-                    $close_time = strtotime($restaurant->sunday_closing_time);
+                    $open = strtotime($restaurant->sunday_opening);
+                    $close = strtotime($restaurant->sunday_closing);
                     break;
                 case 1:
-                    $open_time = strtotime($restaurant->monday_opening_time);
-                    $close_time = strtotime($restaurant->monday_closing_time);
+                    $open = strtotime($restaurant->monday_opening);
+                    $close = strtotime($restaurant->monday_closing);
                     break;
                 case 2:
-                    $open_time = strtotime($restaurant->tuesday_opening_time);
-                    $close_time = strtotime($restaurant->tuesday_closing_time);
+                    $open = strtotime($restaurant->tuesday_opening);
+                    $close = strtotime($restaurant->tuesday_closing);
                     break;
                 case 3:
-                    $open_time = strtotime($restaurant->wednesday_opening_time);
-                    $close_time = strtotime($restaurant->wednesday_closing_time);
+                    $open = strtotime($restaurant->wednesday_opening);
+                    $close = strtotime($restaurant->wednesday_closing);
                     break;
                 case 4:
-                    $open_time = strtotime($restaurant->thursday_opening_time);
-                    $close_time = strtotime($restaurant->thursday_closing_time);
+                    $open = strtotime($restaurant->thursday_opening);
+                    $close = strtotime($restaurant->thursday_closing);
                     break;
                 case 5:
-                    $open_time = strtotime($restaurant->friday_opening_time);
-                    $close_time = strtotime($restaurant->friday_closing_time);
+                    $open = strtotime($restaurant->friday_opening);
+                    $close = strtotime($restaurant->friday_closing);
                     break;
                 case 6:
-                    $open_time = strtotime($restaurant->saturday_opening_time);
-                    $close_time = strtotime($restaurant->saturday_closing_time);
+                    $open = strtotime($restaurant->saturday_opening);
+                    $close = strtotime($restaurant->saturday_closing);
                     break;
                 default:
-                    $open_time = strtotime("00:00");
-                    $close_time = strtotime("00:00");
+                    $open = strtotime("00:00");
+                    $close = strtotime("00:00");
                     break;
             }
 
-            if ($unixtime < $open_time) {
-                $validator->errors()->add('field', 'Het restaurant opent pas om ' . date("H:i", $open_time) . ", dit ligt na het gekozen tijdstip.");
+            if ($unixtime < $open) {
+                $validator->errors()->add('field', 'Het restaurant opent pas om ' . date("H:i", $open) . ", dit ligt na het gekozen tijdstip.");
             }
 
-            if ($unixtime > $close_time) {
-                $validator->errors()->add('field', 'Het restaurant sluit om ' . date("H:i", $close_time) . ", dit is eerder dan het gekozen tijdstip.");
+            if ($unixtime > $close) {
+                $validator->errors()->add('field', 'Het restaurant sluit om ' . date("H:i", $close) . ", dit is eerder dan het gekozen tijdstip.");
             }
         });
     }
