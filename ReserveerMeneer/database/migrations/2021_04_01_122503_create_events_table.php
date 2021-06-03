@@ -15,10 +15,10 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
-            $table->string('address');
-            $table->string('city');
+            $table->text('name');
+            $table->text('description');
+            $table->text('address');
+            $table->text('city');
             $table->float('price');
             $table->integer('max_tickets');
             $table->dateTime('start_date');

@@ -87,7 +87,7 @@
                                 </a>
                             </div>
                             <div class="col-span-1 text-right">
-                                <button type="submit" class="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow save">
+                                <button type="submit" class="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow">
                                     Opslaan
                                 </button>
                             </div>

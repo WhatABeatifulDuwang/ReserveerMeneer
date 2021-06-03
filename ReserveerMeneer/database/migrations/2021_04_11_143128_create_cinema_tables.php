@@ -15,9 +15,9 @@ class CreateCinemaTables extends Migration
     {
         Schema::create('cinemas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('address');
-            $table->string('city');
+            $table->text('name');
+            $table->text('address');
+            $table->text('city');
             $table->timestamps();
         });
 
@@ -56,8 +56,8 @@ class CreateCinemaTables extends Migration
                 ->on('halls')
                 ->onDelete('cascade');
 
-            $table->string('name');
-            $table->string('description');
+            $table->text('name');
+            $table->text('description');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->timestamps();
@@ -97,11 +97,11 @@ class CreateCinemaTables extends Migration
                 ->on('film_seats')
                 ->onDelete('cascade');
 
-            $table->string('name');
-            $table->string('email');
-            $table->string('address');
-            $table->string('postal_code');
-            $table->string('city');
+            $table->text('name');
+            $table->text('email');
+            $table->text('address');
+            $table->text('postal_code');
+            $table->text('city');
             $table->timestamps();
         });
     }
