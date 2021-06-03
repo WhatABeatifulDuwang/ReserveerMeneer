@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Event;
 
 use App\Models\Event\Event;
 use DateTime;
@@ -16,12 +16,12 @@ class ReserveEventRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|string|max:255',
             'file' => 'required|mimes:jpeg,png',
-            'email' => 'required',
-            'ticket_number' => 'required|gt:0',
-            'start_date' => 'required',
-            'days_count' => 'required',
+            'email' => 'required|email',
+            'ticket_number' => 'required|integer|gt:0',
+            'start_date' => 'required|date_format:Y-m-d\TH:i',
+            'days_count' => 'required|integer',
         ];
     }
 

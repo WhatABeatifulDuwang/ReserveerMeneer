@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/ReserveerMeneer/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/ReserveerMeneer/vendor/elgibor-solution/laravel-database-encryption" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

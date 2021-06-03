@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 
-use App\Http\Requests\ReserveRestaurantRequest;
+use App\Http\Requests\Restaurant\ReserveRestaurantRequest;
 use App\Models\Restaurant\Restaurant;
 use App\Models\Restaurant\RestaurantReservation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class RestaurantController extends Controller
 {
@@ -24,16 +23,18 @@ class RestaurantController extends Controller
         }
 
         $categories = Restaurant::select("type")->distinct()->get();
-        return view('restaurant.index', ['restaurants' => $restaurants, "categories" => $categories]);
+
+        return view('restaurant.index')
+            ->with('restaurants', $restaurants)
+            ->with("categories", $categories);
     }
 
     public function indexAdmin()
     {
         $restaurants = Restaurant::all();
 
-        return view('restaurantAdmin.index', [
-            'restaurants' => $restaurants
-        ]);
+        return view('restaurantAdmin.index')
+            ->with('restaurants', $restaurants);
     }
 
     public function create()
@@ -70,13 +71,12 @@ class RestaurantController extends Controller
 
     public function details($id)
     {
-        $restaurant = Restaurant::find($id);
+        $restaurant = Restaurant::findOrFail($id);
 
         if ($restaurant != null) {
-            return view('restaurant.reservation', [
-                'restaurant' => $restaurant,
-                'id' => $id
-            ]);
+            return view('restaurant.reservation')
+                ->with('restaurant', $restaurant)
+                ->with('id', $id);
         }
         else {
             return redirect("/restaurants");
@@ -85,13 +85,16 @@ class RestaurantController extends Controller
 
     public function edit($id)
     {
-        $restaurant = Restaurant::find($id);
-        return view('restaurantAdmin.edit', ['restaurant' => $restaurant]);
+        $restaurant = Restaurant::findOrFail($id);
+
+        return view('restaurantAdmin.edit')
+            ->with('restaurant', $restaurant);
     }
 
     public function update($id, Request $request)
     {
-        $restaurant = Restaurant::find($id);
+        $restaurant = Restaurant::findOrFail($id);
+
         $request->validate([
             "name" => 'required',
             "type" => 'required',
@@ -151,7 +154,7 @@ class RestaurantController extends Controller
         $restaurant = null;
 
         if ($request->restaurant != null) {
-            $restaurant = Restaurant::find($request->restaurant);
+            $restaurant = Restaurant::findOrFail($request->restaurant);
             if ($restaurant == null) {
                 return redirect('/dashboard')->with('status', "Het gekozen restaurant bestaat niet!");
             }
@@ -167,13 +170,20 @@ class RestaurantController extends Controller
 
         $reservations = RestaurantReservation::where("restaurant_id", "=", $restaurant->id)->where("date", "=", $date)->get();
 
-        return view('restaurant.dashboard', ["restaurants" => $restaurants, "reservations" => $reservations, "restaurant" => $restaurant, "date" => $date]);
+        return view('restaurant.dashboard')
+            ->with("restaurants", $restaurants)
+            ->with("reservations", $reservations)
+            ->with("restaurant", $restaurant)
+            ->with("date", $date);
     }
 
-    public function destroy(Restaurant $restaurant)
+    public function destroy($id)
     {
+        $restaurant = Restaurant::findOrFail($id);
+
         $restaurant->delete();
 
-        return redirect()->route('getRestaurantAdminIndex')->with('success', 'Het restaurant is succesvol verwijderd!');
+        return redirect()->route('getRestaurantAdminIndex')
+            ->with('success', 'Het restaurant is succesvol verwijderd!');
     }
 }

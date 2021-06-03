@@ -64,7 +64,7 @@ Route::prefix('restaurants')->group(function () {
     Route::get('/restaurant-create', '\App\Http\Controllers\RestaurantController@create')->middleware(['auth'])->name('getRestaurantCreate');
     Route::get('/{id}/restaurant-edit', '\App\Http\Controllers\RestaurantController@edit')->middleware(['auth'])->name('getRestaurantEdit');
     Route::post('/restaurant-store', '\App\Http\Controllers\RestaurantController@store')->middleware(['auth'])->name('postRestaurantStore');
-    Route::post('/{id}/restaurant-update', '\App\Http\Controllers\RestaurantController@update')->middleware(['auth'])->name('postRestaurantEdit');
+    Route::post('/{id}/restaurant-update', '\App\Http\Controllers\RestaurantController@update')->middleware(['auth'])->name('postRestaurantUpdate');
     Route::post('/{id}/restaurant-delete', '\App\Http\Controllers\RestaurantController@delete')->middleware(['auth'])->name('postRestaurantDelete');
 });
 

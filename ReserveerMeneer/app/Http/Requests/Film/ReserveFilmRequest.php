@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Film;
 
 use App\Models\Cinema\Film;
 use App\Models\Cinema\FilmReservation;
@@ -17,12 +17,12 @@ class ReserveFilmRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required',
-            'address' => 'required',
-            'postal_code' => 'required',
-            'city' => 'required',
-            'seat_id' => 'required|gt:0',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'address' => 'required|string|max:255',
+            'postal_code' => 'required|string',
+            'city' => 'required|string|max:255',
+            'seat_id' => 'required|integer|gt:0',
         ];
     }
 

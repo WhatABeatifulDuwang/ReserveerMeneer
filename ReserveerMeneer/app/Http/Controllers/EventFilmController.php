@@ -25,9 +25,8 @@ class EventFilmController extends Controller
             array_multisort($name, SORT_ASC, $eventsAndFilms);
         }
 
-        return view('EventsAndFilms.index', [
-            'eventsAndFilms' => $eventsAndFilms,
-        ]);
+        return view('EventsAndFilms.index')
+            ->with('eventsAndFilms', $eventsAndFilms);
     }
 
     public function getEventsAndFilms(Request $request)
@@ -37,14 +36,14 @@ class EventFilmController extends Controller
         $newFilmArray = array();
 
         foreach ($filmArray as $film) {
-            $hall = Hall::find($film['hall_id']);
-            $cinema = Cinema::find($hall->cinema_id);
+            $hall = Hall::findOrFail($film['hall_id']);
+            $cinema = Cinema::findOrFail($hall->cinema_id);
             $film['cinema_name'] = $cinema->name;
             $film['city'] = $cinema->city;
             array_push($newFilmArray, $film);
         }
 
-        $events =Event::all();
+        $events = Event::all();
         $EventArray = $events->toArray();
         $eventsAndFilms = array_merge($EventArray, $newFilmArray);
 

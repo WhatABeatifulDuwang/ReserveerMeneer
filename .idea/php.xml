@@ -107,9 +107,10 @@
       <path value="$PROJECT_DIR$/ReserveerMeneer/vendor/facade/ignition" />
       <path value="$PROJECT_DIR$/ReserveerMeneer/vendor/laravel/sail" />
       <path value="$PROJECT_DIR$/ReserveerMeneer/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/ReserveerMeneer/vendor/elgibor-solution/laravel-database-encryption" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/ReserveerMeneer/vendor/autoload.php" />
