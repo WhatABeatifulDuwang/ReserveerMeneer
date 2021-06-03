@@ -15,8 +15,8 @@ class CreateRestaurantTable extends Migration
     {
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("type");
+            $table->text("name");
+            $table->text("type");
             $table->time("monday_opening_time", $precision = 0);
             $table->time("monday_closing_time", $precision = 0);
             $table->time("tuesday_opening_time", $precision = 0);

@@ -4,12 +4,14 @@
 namespace App\Models\Event;
 
 
+use App\Traits\Encryptable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
 {
     use HasFactory;
+    use Encryptable;
 
     protected $fillable = [
         "event_id",
@@ -23,6 +25,12 @@ class Reservation extends Model
         "end_date",
         "ticket_number",
         "total_price",
+    ];
+
+    protected $encryptable = [
+        "name",
+        "address",
+        "city",
     ];
 
     public function event(){
