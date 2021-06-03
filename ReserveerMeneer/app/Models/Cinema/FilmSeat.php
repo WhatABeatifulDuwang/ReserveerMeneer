@@ -16,4 +16,8 @@ class FilmSeat extends Model
         "y",
         "occupied",
     ];
+
+    public function film(){
+        return $this->hasOneThrough(Film::class, FilmReservation::class, 'filmSeat_id', 'id', 'id', 'film_id');
+    }
 }

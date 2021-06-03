@@ -11,9 +11,8 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = Reservation::all();
-        return view('reservation.index', [
-            'reservations' => $reservations,
-        ]);
+        return view('reservation.index')
+            ->with('reservations', $reservations);
     }
 
     function exportCsv()

@@ -22,12 +22,12 @@ class CreateReservationsTable extends Migration
                 ->on('events')
                 ->onDelete('cascade');
 
-            $table->string('name');
-            $table->string('email');
-            $table->string('address');
-            $table->string('postal_code');
-            $table->string('city');
-            $table->string('img_path');
+            $table->text('name');
+            $table->text('email');
+            $table->text('address');
+            $table->text('postal_code');
+            $table->text('city');
+            $table->text('img_path');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->integer('ticket_number');

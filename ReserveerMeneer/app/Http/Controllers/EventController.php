@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ReserveEventRequest;
+use App\Http\Requests\Event\ReserveEventRequest;
 use App\Models\Event\Event;
 use App\Models\Event\Reservation;
 use DateTime;
@@ -14,18 +14,16 @@ class EventController extends Controller
     {
         $events = Event::all();
 
-        return view('event.index', [
-            'events' => $events
-        ]);
+        return view('event.index')
+            ->with('events', $events);
     }
 
     public function indexAdmin()
     {
         $events = Event::all();
 
-        return view('eventAdmin.index', [
-            'events' => $events
-        ]);
+        return view('eventAdmin.index')
+            ->with('events', $events);
     }
 
     public function create()
@@ -36,14 +34,14 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'price' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'max_tickets' => 'required'
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'price' => 'required|integer',
+            'start_date' => 'required|date_format:Y-m-d\TH:i',
+            'end_date' => 'required|date_format:Y-m-d\TH:i|after:start_date',
+            'max_tickets' => 'required|integer'
         ]);
 
         Event::create($request->all());
@@ -53,19 +51,25 @@ class EventController extends Controller
 
     public function details($id)
     {
-        $event = Event::find($id);
-        return view('event.details', ['event' => $event]);
+        $event = Event::findOrFail($id);
+
+        return view('event.details')
+            ->with('event', $event);
     }
 
     public function edit($id)
     {
-        $event = Event::find($id);
-        return view('eventAdmin.edit', ['event' => $event]);
+        $event = Event::findOrFail($id);
+
+        return view('eventAdmin.edit')
+            ->with('event', $event);
     }
 
     public function update($id, Request $request)
     {
-        $event = Event::find($id);
+        $event = Event::findOrFail($id);
+        $this->decrypt($event);
+
         $event->name = $request->input('name');
         $event->description = $request->input('description');
         $event->address = $request->input('address');
@@ -86,16 +90,16 @@ class EventController extends Controller
 
     public function reservationDetails($id)
     {
-        $event = Event::find($id);
-        return view('event.reservation', [
-            'event' => $event,
-            'id' => $id
-        ]);
+        $event = Event::findOrFail($id);
+
+        return view('event.reservation')
+            ->with('event', $event)
+            ->with('id', $id);
     }
 
     public function makeReservation(ReserveEventRequest $request, $id)
     {
-        $event = Event::find($id);
+        $event = Event::findOrFail($id);
 
         $startDateTime = new DateTime($request->start_date);
         $endDateTime = new DateTime($request->start_date);
@@ -133,15 +137,16 @@ class EventController extends Controller
 
     public function getConfirmation($id)
     {
-        $reservation = Reservation::find($id);
-        return view('event.confirmation', [
-            'reservation' => $reservation,
-            'id' => $id
-        ]);
+        $reservation = Reservation::findOrFail($id);
+        return view('event.confirmation')
+            ->with('reservation', $reservation)
+            ->with('id', $id);
     }
 
-    public function destroy(Event $event)
+    public function destroy($id)
     {
+        $event = Event::findOrFail($id);
+
         $event->delete();
 
         return redirect()->route('getEventAdminIndex')->with('success', 'Het evenement is succesvol verwijderd!');

@@ -4,12 +4,15 @@
 namespace App\Models\Restaurant;
 
 
+use App\Models\Event\Reservation;
+use App\Traits\Encryptable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Restaurant extends Model
 {
     use HasFactory;
+    use Encryptable;
 
     protected $fillable = [
         "name",
@@ -30,4 +33,13 @@ class Restaurant extends Model
         "sunday_closing_time",
         "amount_of_seats",
     ];
+
+    protected $encryptable = [
+        'name',
+        'type',
+    ];
+
+    public function reservations(){
+        return $this->hasMany(Reservation::class);
+    }
 }

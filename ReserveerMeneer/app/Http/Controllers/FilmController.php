@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ReserveFilmRequest;
+use App\Http\Requests\Film\ReserveFilmRequest;
 use App\Models\Cinema\Cinema;
 use App\Models\Cinema\Film;
 use App\Models\Cinema\FilmReservation;
@@ -12,22 +12,20 @@ use Illuminate\Http\Request;
 
 class FilmController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $films = Film::all();
 
-        return view('film.index', [
-            'films' => $films
-        ]);
+        return view('film.index')
+            ->with('films', $films);
     }
 
     public function indexAdmin()
     {
         $films = Film::all();
 
-        return view('filmAdmin.index', [
-            'films' => $films
-        ]);
+        return view('filmAdmin.index')
+            ->with('films', $films);
     }
 
     public function create()
@@ -38,11 +36,11 @@ class FilmController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'hall_id' => 'required',
-            'name' => 'required',
-            'description' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
+            "hall_id" => 'required|integer',
+            "name" => 'required|string|max:255',
+            "description" => 'required|string|max:255',
+            "start_date" => 'required|date_format:Y-m-d\TH:i',
+            'end_date' => 'required|date_format:Y-m-d\TH:i|after:start_date',
         ]);
 
         Film::create($request->all());
@@ -52,32 +50,37 @@ class FilmController extends Controller
 
     public function details($id)
     {
-        $film = Film::find($id);
-        $hall = Hall::find($film->hall_id);
-        $cinema = Cinema::find($hall->cinema_id);
+        $film = Film::findOrFail($id);
+        $hall = Hall::findOrFail($film->hall_id);
+        $cinema = Cinema::findOrFail($hall->cinema_id);
 
         if ($film == null) {
             return redirect()->route('getEventIndex');
         }
 
-        return view('film.details', ['film' => $film, 'cinema' => $cinema]);
+        return view('film.details')
+            ->with('film', $film)
+            ->with('cinema', $cinema);
     }
 
     public function edit($id)
     {
-        $film = Film::find($id);
-        return view('filmAdmin.edit', ['film' => $film]);
+        $film = Film::findOrFail($id);
+
+        return view('filmAdmin.edit')
+            ->with('film', $film);
     }
 
     public function update($id, Request $request)
     {
-        $film = Film::find($id);
+        $film = Film::findOrFail($id);
+
         $request->validate([
-            "hall_id" => 'required',
-            "name" => 'required',
-            "description" => 'required',
-            "start_date" => 'required',
-            "end_date" => 'required',
+            "hall_id" => 'required|integer',
+            "name" => 'required|string|max:255',
+            "description" => 'required|string|max:255',
+            "start_date" => 'required|date_format:Y-m-d\TH:i',
+            'end_date' => 'required|date_format:Y-m-d\TH:i|after:start_date',
         ]);
 
         $film->update($request->all());
@@ -87,7 +90,7 @@ class FilmController extends Controller
 
     public function reservationDetails($id)
     {
-        $film = Film::find($id);
+        $film = Film::findOrFail($id);
         $seats = FilmSeat::where('film_id', $film->id)->get();
         $maxX = $seats->max('x');
         $maxY = $seats->max('y');
@@ -118,7 +121,7 @@ class FilmController extends Controller
         ]);
 
         // reserve the selected seat
-        $filmSeat = FilmSeat::find($request->input('seat_id'));
+        $filmSeat = FilmSeat::findOrFail($request->input('seat_id'));
         $filmSeat->reserved = 1;
         $filmSeat->save();
 
@@ -130,6 +133,7 @@ class FilmController extends Controller
             ['x', '=', $x - 1],
             ['y', '=', $y]
         ])->first();
+
         if ($leftSeat) {
             $leftSeat->reserved = 1;
             $leftSeat->save();
@@ -140,6 +144,7 @@ class FilmController extends Controller
             ['x', '=', $x + 1],
             ['y', '=', $y]
         ])->first();
+
         if ($rightSeat) {
             $rightSeat->reserved = 1;
             $rightSeat->save();
@@ -148,8 +153,10 @@ class FilmController extends Controller
         return redirect()->route('getFilmIndex');
     }
 
-    public function destroy(Film $film)
+    public function destroy($id)
     {
+        $film = Film::findOrFail($id);
+
         $film->delete();
 
         return redirect()->route('getFilmAdminIndex')->with('success', 'De film is succesvol verwijderd!');
