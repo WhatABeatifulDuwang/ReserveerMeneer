@@ -35,16 +35,31 @@ class EventFilmController extends Controller
         $newFilmArray = array();
 
         foreach ($filmArray as $film) {
-            $hall = Hall::findOrFail($film['hall_id']);
-            $cinema = Cinema::findOrFail($hall->cinema_id);
+            $film['name'] = decrypt($film['name']);
+            $film['description'] = decrypt($film['description']);
+
+            $hall = Hall::find($film['hall_id']);
+            $cinema = Cinema::find($hall->cinema_id);
             $film['cinema_name'] = $cinema->name;
             $film['city'] = $cinema->city;
+
             array_push($newFilmArray, $film);
         }
 
         $events = Event::all();
         $EventArray = $events->toArray();
-        $eventsAndFilms = array_merge($EventArray, $newFilmArray);
+        $newEventArray = array();
+
+        foreach ($EventArray as $event) {
+            $event['name'] = decrypt($event['name']);
+            $event['description'] = decrypt($event['description']);
+            $event['address'] = decrypt($event['address']);
+            $event['city'] = decrypt($event['city']);
+
+            array_push($newEventArray, $event);
+        }
+
+        $eventsAndFilms = array_merge($newEventArray, $newFilmArray);
 
         if ($request->location) {
             $filterBy = $request->location;
