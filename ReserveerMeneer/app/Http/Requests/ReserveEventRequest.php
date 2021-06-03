@@ -17,7 +17,6 @@ class ReserveEventRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'file' => 'required|mimes:jpeg,png',
             'email' => 'required',
             'ticket_number' => 'required|gt:0',
             'start_date' => 'required',
