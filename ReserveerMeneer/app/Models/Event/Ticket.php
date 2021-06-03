@@ -3,7 +3,6 @@
 
 namespace App\Models\Event;
 
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +16,6 @@ class Ticket extends Model
     ];
 
     public function event(){
-        return $this->hasOne(Event::class);
+        return $this->hasOneThrough(Event::class, Reservation::class, 'ticket_id', 'id', 'id', 'event_id');
     }
 }
