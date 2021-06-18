@@ -20,7 +20,7 @@ class ReserveEventRequest extends FormRequest
             'file' => 'required|mimes:jpeg,png',
             'email' => 'required|email',
             'ticket_number' => 'required|integer|gt:0',
-            'start_date' => 'required|date_format:Y-m-d\TH:i',
+            'start_date' => 'required|date_format:Y-m-d',
             'days_count' => 'required|integer',
         ];
     }

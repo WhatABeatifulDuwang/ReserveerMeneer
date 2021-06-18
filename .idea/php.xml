@@ -108,6 +108,10 @@
       <path value="$PROJECT_DIR$/ReserveerMeneer/vendor/symfony/http-kernel" />
       <path value="$PROJECT_DIR$/ReserveerMeneer/vendor/symfony/translation-contracts" />
       <path value="$PROJECT_DIR$/ReserveerMeneer/vendor/league/commonmark" />
+      <path value="$PROJECT_DIR$/ReserveerMeneer/vendor/dnoegel/php-xdg-base-dir" />
+      <path value="$PROJECT_DIR$/ReserveerMeneer/vendor/staudenmeir/dusk-updater" />
+      <path value="$PROJECT_DIR$/ReserveerMeneer/vendor/php-webdriver/webdriver" />
+      <path value="$PROJECT_DIR$/ReserveerMeneer/vendor/laravel/dusk" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

@@ -31,10 +31,10 @@ class ReserveEventTest extends TestCase
 
         return [
             [[
-                "name" => $faker->title,
+                "name" => $faker->name,
                 "email" => $faker->email,
                 "ticket_number" =>  $faker->randomDigit + 1,
-                "start_date" => '07-07-2021',
+                "start_date" => '01-06-2021',
                 "days_count" => $faker->randomDigit + 1,
             ]],
         ];
